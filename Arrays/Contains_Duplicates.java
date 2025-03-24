@@ -81,7 +81,8 @@ public class Contains_Duplicates
         for(int x : nums)
             seen2.add(x);
 
-        return nums.length == seen2.size();    
+        // if nums.length == seen2.size() -> duplicate doesnt exist --> return false
+        return nums.length != seen2.size();    
     }
 
 
