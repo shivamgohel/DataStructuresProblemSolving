@@ -4,6 +4,11 @@ public class Contains_Duplicates
 {
     public static void main(String[] args)
     {
+        /*
+        Problem Statement:
+        Given an integer array nums, return true if any value appears at least twice in the array, and false if every element is distinct.
+        */
+       
         int nums[] = {1,2,3,3};
 
         // Brute-force approach: O(n²) time complexity O(1), space complexity
