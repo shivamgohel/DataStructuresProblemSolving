@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Contains_Duplicates
+public class ContainsDuplicates
 {
     public static void main(String[] args)
     {

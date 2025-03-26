@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Valid_Anagram
+class ValidAnagram
 {
     public static void main(String[] args) 
     {   
