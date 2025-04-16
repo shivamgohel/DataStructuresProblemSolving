@@ -18,6 +18,9 @@ class LongestRepeatingCharacterReplacement
         // Brute-force approach: O(n^2) time, O(k) space
         System.out.println(longestRepeatingCharacterReplacementBrute(s,k));
 
+        // Better approach: O(n * 26) time, O(k) space
+        System.out.println(longestRepeatingCharacterReplacementBetter(s,k));
+
         // Optimized approach 1 (Sliding Window using HashMap): O(n) time, O(k) space
         System.out.println(longestRepeatingCharacterReplacementOptimized1(s,k));
 
@@ -57,6 +60,48 @@ class LongestRepeatingCharacterReplacement
 
                 maximum_length = Math.max(maximum_length, window_length);    
             }
+        }
+
+        return maximum_length;
+    }
+
+    /*
+     Better Approach: Sliding Window using HashMap
+     - Use a sliding window technique with two pointers (`left` and `right`).
+     - Track the frequency of characters within the window using a HashMap.
+     - If the window is valid (i.e., the number of characters needing replacement does not exceed `k`), expand the window by moving the `right` pointer.
+     - If the window becomes invalid (i.e., we need more than `k` replacements), move the `left` pointer to shrink the window.
+     - recalculate the maxiumum_frequency as well 
+     - Keep updating the maximum length of valid windows found.
+      
+     Time Complexity: O(n) — we only pass through the string once.
+     Space Complexity: O(k) — HashMap stores frequencies of characters in the window.
+    */
+    private static int longestRepeatingCharacterReplacementBetter(String s, int k){
+        int maximum_length = 0;
+        int maximum_frequency = 0;
+        HashMap<Character,Integer> seen = new HashMap<>();
+        int left = 0;
+
+        for(int right=0;right<s.length();right++)
+        {
+            char current_character = s.charAt(right);
+            seen.put(current_character, seen.getOrDefault(current_character, 0) +1);
+            maximum_frequency = Math.max(maximum_frequency, seen.get(current_character));
+
+            int window_length = right - left + 1;
+            if(window_length - maximum_frequency > k)
+            {
+                char left_character = s.charAt(left);
+                seen.put(left_character, seen.get(left_character) -1); 
+                left++;
+
+                maximum_frequency = 0;
+                for(int freq : seen.values())
+                    maximum_frequency = Math.max(maximum_frequency,freq);
+            }
+
+            maximum_length = Math.max(maximum_length, window_length);
         }
 
         return maximum_length;
