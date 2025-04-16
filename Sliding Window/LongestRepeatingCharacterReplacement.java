@@ -71,10 +71,11 @@ class LongestRepeatingCharacterReplacement
      - Track the frequency of characters within the window using a HashMap.
      - If the window is valid (i.e., the number of characters needing replacement does not exceed `k`), expand the window by moving the `right` pointer.
      - If the window becomes invalid (i.e., we need more than `k` replacements), move the `left` pointer to shrink the window.
-     - recalculate the maxiumum_frequency as well. TC:O(26)
+     - Recalculate the maximum_frequency as well. 
+     - The recalculation of `maximum_frequency` involves checking the entire `HashMap` to find the highest frequency, which takes **O(26)** time since we have at most 26 possible characters (for uppercase English letters).
      - Keep updating the maximum length of valid windows found.
       
-     Time Complexity: O(n * 26) — we only pass through the string once.
+     Time Complexity: O(n * 26) — We pass through the string once and recalculate the `maximum_frequency` by checking 26 characters at most.
      Space Complexity: O(k) — HashMap stores frequencies of characters in the window.
     */
     private static int longestRepeatingCharacterReplacementBetter(String s, int k){
